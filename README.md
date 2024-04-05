@@ -73,6 +73,63 @@ Client-server chat applications are versatile tools that facilitate real-time co
 
 Client-server chat applications are foundational to real-time communication over networks. They incorporate principles of socket programming, communication protocols, and security mechanisms to provide a seamless user experience. Understanding the basics of client-server chat applications is essential for developers involved in networked application development, as they form the backbone of various collaborative communication systems. As technology evolves, chat applications continue to adapt, incorporating new features and technologies to enhance user interaction and connectivity.
 
+## PROGRAM
+
+## CLIENT
+```
+import socket
+
+s = socket.socket()
+host = input(str('Enter hostname or host IP : '))
+port = 8080
+s.connect((host, port))
+print('Connected to chat server')
+while 1:
+    incoming_message = s.recv(1024)
+    incoming_message = incoming_message.decode()
+    print(' Server : ', incoming_message)
+    print()
+    message = input(str('>> '))
+    message = message.encode()
+    s.send(message)
+    print('Sent')
+    print()
+```
+## SERVER 
+```
+import socket
+
+s = socket.socket()
+host = socket.gethostname()
+print(' Server will start on host : ', host)
+port = 8080
+s.bind((host, port))
+print()
+print('Waiting for connection')
+print()
+s.listen(1)
+conn, addr = s.accept()
+print(addr, ' Has connected to the server')
+print()
+while 1:
+    message = input(str('>> '))
+    message = message.encode()
+    conn.send(message)
+    print('Sent')
+    print()
+    incoming_message = conn.recv(1024)
+    incoming_message = incoming_message.decode()
+    print(' Client : ', incoming_message)
+    print()
+```
+## OUTPUT
+
+## CLIENT
+![Screenshot 2024-04-05 103218](https://github.com/NaliniG007/ChatStudy/assets/149037327/695e01f2-0954-4033-9862-a99c2905e28f)
+
+## SERVER 
+![WhatsApp Image 2024-04-05 at 10 37 28_17510b27](https://github.com/NaliniG007/ChatStudy/assets/149037327/c91f956a-96af-4b65-bb02-9fdc4fadf5be)
+
 
 ## Result:
 
